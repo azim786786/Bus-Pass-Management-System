@@ -1,0 +1,49 @@
+{% extends "base.html" %}
+
+{% block title %}Reports{% endblock %}
+
+{% block content %}
+<h1>Reports</h1>
+<form method="POST" class="mb-4">
+    {{ form.hidden_tag() }}
+    <div class="row">
+        <div class="col-md-4">
+            {{ form.start_date.label(class="form-label") }}
+            {{ form.start_date(class="form-control") }}
+        </div>
+        <div class="col-md-4">
+            {{ form.end_date.label(class="form-label") }}
+            {{ form.end_date(class="form-control") }}
+        </div>
+        <div class="col-md-4 d-flex align-items-end">
+            {{ form.submit(class="btn btn-primary") }}
+        </div>
+    </div>
+</form>
+{% if passes %}
+<table class="table">
+    <thead>
+        <tr>
+            <th>Pass Number</th>
+            <th>Holder Name</th>
+            <th>Category</th>
+            <th>Issue Date</th>
+            <th>Expiry Date</th>
+            <th>Status</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for pass in passes %}
+        <tr>
+            <td>{{ pass.pass_number }}</td>
+            <td>{{ pass.holder_name }}</td>
+            <td>{{ pass.category.name }}</td>
+            <td>{{ pass.issue_date.strftime('%Y-%m-%d') }}</td>
+            <td>{{ pass.expiry_date.strftime('%Y-%m-%d') }}</td>
+            <td>{{ pass.status }}</td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+{% endif %}
+{% endblock %}

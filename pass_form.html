@@ -1,0 +1,32 @@
+{% extends "base.html" %}
+
+{% block title %}{{ title }}{% endblock %}
+
+{% block content %}
+<h1>{{ title }}</h1>
+<form method="POST">
+    {{ form.hidden_tag() }}
+    <div class="mb-3">
+        {{ form.pass_number.label(class="form-label") }}
+        {{ form.pass_number(class="form-control") }}
+    </div>
+    <div class="mb-3">
+        {{ form.holder_name.label(class="form-label") }}
+        {{ form.holder_name(class="form-control") }}
+    </div>
+    <div class="mb-3">
+        {{ form.category_id.label(class="form-label") }}
+        {{ form.category_id(class="form-control") }}
+    </div>
+    <div class="mb-3">
+        {{ form.expiry_date.label(class="form-label") }}
+        {{ form.expiry_date(class="form-control") }}
+    </div>
+    <div class="mb-3">
+        <label for="amount" class="form-label">Amount (Optional)</label>
+        <input type="number" step="0.01" class="form-control" id="amount" name="amount" placeholder="Enter amount if known">
+    </div>
+    <button type="submit" class="btn btn-primary">{{ form.submit.label.text }}</button>
+    <a href="{{ url_for('passes') }}" class="btn btn-secondary">Cancel</a>
+</form>
+{% endblock %}

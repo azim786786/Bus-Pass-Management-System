@@ -1,0 +1,43 @@
+{% extends "base.html" %}
+
+{% block title %}Dashboard{% endblock %}
+
+{% block content %}
+<h1>Dashboard</h1>
+<div class="row">
+    <div class="col-md-4">
+        <div class="card">
+            <div class="card-body">
+                <h5 class="card-title">Total Categories</h5>
+                <p class="card-text">{{ total_categories }}</p>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-4">
+        <div class="card">
+            <div class="card-body">
+                <h5 class="card-title">Passes Today</h5>
+                <p class="card-text">{{ passes_today }}</p>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-4">
+        <div class="card">
+            <div class="card-body">
+                <h5 class="card-title">Passes Yesterday</h5>
+                <p class="card-text">{{ passes_yesterday }}</p>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="row mt-3">
+    <div class="col-md-4">
+        <div class="card">
+            <div class="card-body">
+                <h5 class="card-title">Passes Last 7 Days</h5>
+                <p class="card-text">{{ passes_last_week }}</p>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

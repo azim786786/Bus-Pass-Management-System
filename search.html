@@ -1,0 +1,33 @@
+{% extends "base.html" %}
+
+{% block title %}Search{% endblock %}
+
+{% block content %}
+<h1>Search Pass</h1>
+<form method="POST" class="mb-4">
+    {{ form.hidden_tag() }}
+    <div class="row">
+        <div class="col-md-6">
+            {{ form.pass_number.label(class="form-label") }}
+            {{ form.pass_number(class="form-control") }}
+        </div>
+        <div class="col-md-6 d-flex align-items-end">
+            {{ form.submit(class="btn btn-primary") }}
+        </div>
+    </div>
+</form>
+{% if pass_obj %}
+<div class="card">
+    <div class="card-body">
+        <h5 class="card-title">Pass Details</h5>
+        <p><strong>Pass Number:</strong> {{ pass_obj.pass_number }}</p>
+        <p><strong>Holder Name:</strong> {{ pass_obj.holder_name }}</p>
+        <p><strong>Category:</strong> {{ pass_obj.category.name }}</p>
+        <p><strong>Issue Date:</strong> {{ pass_obj.issue_date.strftime('%Y-%m-%d') }}</p>
+        <p><strong>Expiry Date:</strong> {{ pass_obj.expiry_date.strftime('%Y-%m-%d') }}</p>
+        <p><strong>Status:</strong> {{ pass_obj.status }}</p>
+        <a href="{{ url_for('print_pass', id=pass_obj.id) }}" class="btn btn-info">Print Pass</a>
+    </div>
+</div>
+{% endif %}
+{% endblock %}

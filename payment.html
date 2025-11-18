@@ -1,0 +1,25 @@
+{% extends "base.html" %}
+
+{% block title %}Pay for Pass{% endblock %}
+
+{% block content %}
+<h1>Pay for Pass</h1>
+<div class="card">
+    <div class="card-body">
+        <h5 class="card-title">Pass Details</h5>
+        <p><strong>Pass Number:</strong> {{ pass_obj.pass_number }}</p>
+        <p><strong>Holder Name:</strong> {{ pass_obj.holder_name }}</p>
+        <p><strong>Category:</strong> {{ pass_obj.category.name }}</p>
+        <p><strong>Expiry Date:</strong> {{ pass_obj.expiry_date.strftime('%Y-%m-%d') }}</p>
+    </div>
+</div>
+<form method="POST" class="mt-3">
+    {{ form.hidden_tag() }}
+    <div class="mb-3">
+        {{ form.amount.label(class="form-label") }}
+        {{ form.amount(class="form-control", placeholder="Enter amount") }}
+    </div>
+    <button type="submit" class="btn btn-success">{{ form.submit.label.text }}</button>
+    <a href="{{ url_for('passes') }}" class="btn btn-secondary">Cancel</a>
+</form>
+{% endblock %}

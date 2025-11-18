@@ -1,0 +1,49 @@
+{% extends "base.html" %}
+
+{% block title %}Passes{% endblock %}
+
+{% block content %}
+<h1>Passes</h1>
+<a href="{{ url_for('add_pass') }}" class="btn btn-primary mb-3">Add Pass</a>
+<table class="table">
+    <thead>
+        <tr>
+            <th>ID</th>
+            <th>Pass Number</th>
+            <th>Holder Name</th>
+            <th>Category</th>
+            <th>Issue Date</th>
+            <th>Expiry Date</th>
+            <th>Status</th>
+            <th>Payment Status</th>
+            <th>Actions</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for pass in passes %}
+        <tr>
+            <td>{{ pass.id }}</td>
+            <td>{{ pass.pass_number }}</td>
+            <td>{{ pass.holder_name }}</td>
+            <td>{{ pass.category.name }}</td>
+            <td>{{ pass.issue_date.strftime('%Y-%m-%d') }}</td>
+            <td>{{ pass.expiry_date.strftime('%Y-%m-%d') }}</td>
+            <td>{{ pass.status }}</td>
+            <td>
+                {% if pass.payment_status == 'paid' %}
+                    <span class="badge bg-success">Paid ({{ pass.amount }})</span>
+                {% else %}
+                    <span class="badge bg-warning">Pending</span>
+                    <a href="{{ url_for('pay_pass', id=pass.id) }}" class="btn btn-sm btn-success ms-1">Pay</a>
+                {% endif %}
+            </td>
+            <td>
+                <a href="{{ url_for('edit_pass', id=pass.id) }}" class="btn btn-sm btn-warning">Edit</a>
+                <a href="{{ url_for('delete_pass', id=pass.id) }}" class="btn btn-sm btn-danger" onclick="return confirm('Are you sure?')">Delete</a>
+                <a href="{{ url_for('print_pass', id=pass.id) }}" class="btn btn-sm btn-info">Print</a>
+            </td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+{% endblock %}
